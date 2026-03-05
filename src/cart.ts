@@ -18,7 +18,7 @@ export class Cart {
     if (existing) {
       existing.quantity += item.quantity;
     } else {
-      this.items.push(item);
+      this.items.push({ ...item });
     }
   }
 
@@ -26,14 +26,12 @@ export class Cart {
     this.items = this.items.filter((i) => i.id !== id);
   }
 
-  // BUG: does not multiply by quantity
   getTotal(): number {
-    return this.items.reduce((sum, item) => sum + item.price, 0);
+    return this.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   }
 
-  // BUG: returns all items including those with quantity 0
   getItems(): CartItem[] {
-    return this.items;
+    return this.items.filter((i) => i.quantity > 0);
   }
 
   count(): number {
