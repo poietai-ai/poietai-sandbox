@@ -1,0 +1,93 @@
+{
+  "tickets": [
+    {
+      "id": "ticket-1",
+      "number": 1,
+      "title": "Fix cart total calculation",
+      "description": "Cart.getTotal() only sums prices without multiplying by quantity. A cart with 3x $10 items returns $10 instead of $30. Fix the reduce in src/cart.ts.",
+      "complexity": 2,
+      "status": "refined",
+      "assignments": [],
+      "acceptanceCriteria": [
+        "getTotal() returns price * quantity for each item",
+        "Existing cart tests pass",
+        "npm test exits with 0 failures for cart tests"
+      ],
+      "phases": ["plan", "build", "validate", "ship"],
+      "activePhase": "plan",
+      "artifacts": {}
+    },
+    {
+      "id": "ticket-2",
+      "number": 2,
+      "title": "Filter zero-quantity items from cart",
+      "description": "Cart.getItems() returns items even when their quantity is 0 (e.g. after decrementing). It should only return items with quantity > 0.",
+      "complexity": 2,
+      "status": "refined",
+      "assignments": [],
+      "acceptanceCriteria": [
+        "getItems() excludes items with quantity === 0",
+        "All cart tests pass"
+      ],
+      "phases": ["plan", "build", "validate", "ship"],
+      "activePhase": "plan",
+      "artifacts": {}
+    },
+    {
+      "id": "ticket-3",
+      "number": 3,
+      "title": "Case-insensitive email lookup",
+      "description": "findByEmail() in src/users.ts does a strict === comparison, so findByEmail(\"FOO@BAR.COM\") won't match a user created with \"foo@bar.com\". Normalize to lowercase.",
+      "complexity": 2,
+      "status": "refined",
+      "assignments": [],
+      "acceptanceCriteria": [
+        "findByEmail() matches regardless of case",
+        "All user tests pass"
+      ],
+      "phases": ["plan", "build", "validate", "ship"],
+      "activePhase": "plan",
+      "artifacts": {}
+    },
+    {
+      "id": "ticket-4",
+      "number": 4,
+      "title": "Validate user fields on create",
+      "description": "createUser() in src/users.ts accepts empty strings for email and name. It should throw an error when either field is empty or whitespace-only.",
+      "complexity": 2,
+      "status": "backlog",
+      "assignments": [],
+      "acceptanceCriteria": [
+        "createUser(\"\", \"name\") throws",
+        "createUser(\"email\", \"\") throws",
+        "createUser(\"  \", \"  \") throws",
+        "Valid inputs still work"
+      ],
+      "phases": ["plan", "build", "validate", "ship"],
+      "activePhase": "plan",
+      "artifacts": {}
+    },
+    {
+      "id": "ticket-5",
+      "number": 5,
+      "title": "Fix all sandbox bugs",
+      "description": "Fix all 5 known bugs across src/cart.ts and src/users.ts. The cart module has getTotal() and getItems() bugs. The users module has findByEmail(), createUser(), and recordLogin() bugs. All 5 failing tests in the test suite should pass after this ticket.",
+      "complexity": 5,
+      "status": "backlog",
+      "assignments": [],
+      "acceptanceCriteria": [
+        "Cart.getTotal() multiplies price by quantity",
+        "Cart.getItems() excludes zero-quantity items",
+        "findByEmail() is case-insensitive",
+        "createUser() validates email and name",
+        "recordLogin() throws on unknown user",
+        "npm test passes with 0 failures"
+      ],
+      "phases": ["brief", "design", "plan", "build", "validate", "qa", "ship"],
+      "activePhase": "brief",
+      "artifacts": {}
+    }
+  ],
+  "selectedTicketId": null,
+  "nextTicketNumber": 6
+}
